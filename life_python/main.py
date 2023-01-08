@@ -1,8 +1,14 @@
+import copy
+
 line = []
 grid = []
+size = 20
 
-for i in range(1, 11):
-    line.append('X')
+dead = '-'
+alive = '#'
+
+for i in range(0, size+1):
+    line.append(dead)
 
 i = 0
 
@@ -10,43 +16,85 @@ while i < len(line):
     grid.append(line.copy())
     i += 1
 
+line_number = 5
+column_number = 3
 
-coordinate_line = -1
-coordinate_column = -1
+grid[line_number][column_number] = alive
+grid[line_number - 1][column_number] = alive
+grid[line_number + 1][column_number] = alive
+grid[line_number][column_number + 1] = alive
+grid[line_number][column_number + 2] = alive
+grid[line_number][column_number + 3] = alive
 
-while not (coordinate_line >= 1 and coordinate_line <= len(line)):
-    coordinate_line = int(input("Escolha a linha onde sua celula vai começar, coloque um numero de 0 a " + str(len(line)) + ": "))
+
+#rules 
+def check_neighbors(i, j):
+    neighbors = 0
+    if (i !=0) and (j != 0):
+        if grid[i-1][j-1] == alive: neighbors += 1
+
+    if (i != 0):
+        if grid[i-1][j] == alive: neighbors += 1
     
-    if not (coordinate_line >= 1 and coordinate_line <= len(line)):
-        print('Você digitou um caractere inválido')
+    if (j != 0):
+        if grid[i][j-1] == alive: neighbors += 1
+    
+    if (i != size) and (j != size):
+        if grid[i+1][j+1] == alive: neighbors += 1
 
-while not (coordinate_column >= 1 and coordinate_column <= len(line)):
-    coordinate_column =  int(input("Escolha a coluna onde sua celula vai começar, coloque um numero de 0 a " + str(len(line)) + ": "))
+    if (i != size):
+        if grid[i+1][j] == alive: neighbors += 1
 
-    if not (coordinate_column >= 1 and coordinate_column <= len(line)):
-        print('Você digitou um caractere inválido')
+    if (j != size):
+        if grid[i][j+1] == alive: neighbors += 1
 
-
-
-if (coordinate_line >= 1 and coordinate_line <= len(line)) and (coordinate_column >= 1 and coordinate_column <= len(line)):
-
-    grid[coordinate_line - 1][coordinate_column - 1] = '0'
-    grid[coordinate_line - 2][coordinate_column - 1] = '0'
-    grid[coordinate_line][coordinate_column - 1] = '0'
-    grid[coordinate_line - 1][coordinate_column] = '0'
-    grid[coordinate_line - 1][coordinate_column + 1] = '0'
-    grid[coordinate_line - 1][coordinate_column + 2] = '0'
-    grid[coordinate_line - 1][coordinate_column + 3] = '0'
+    if (i != 0 and j != size):
+        if grid[i-1][j+1] == alive: neighbors += 1
+    
+    if (i != size and j != 0):
+        if grid[i+1][j-1] == alive: neighbors += 1
 
 
-c = 0
+    return neighbors
 
-while c < len(grid):
-    l = 0
-    while l < len(grid[c]):
-        print(grid[c][l], end='')
-        l+=1
-    print()
-    c+=1
+def mutate_cells(i, j):
+    is_dead = grid[i][j] == dead
+
+    neighbors = check_neighbors(i, j)
+
+    if is_dead:
+        if neighbors == 3:
+            return alive
+
+        else:
+            return dead
+    
+    if neighbors <= 1 or neighbors >= 4:
+        return dead
+
+    return alive 
+
+def create_new_cycle():
+    carlos = copy.deepcopy(grid)
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            carlos[i][j] = mutate_cells(i, j)
+    return carlos        
+
+def print_matrix():
+    c = 0
+
+    while c < len(grid):
+        l = 0
+        while l < len(grid[c]):
+            print(grid[c][l], end='')
+            l+=1
+        print()
+        c+=1
+
+print_matrix()
+
+
+
 
 
