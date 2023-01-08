@@ -95,6 +95,12 @@ def print_matrix():
 print_matrix()
 
 
+game = input('Aperte enter para gerar um novo ciclo ou digite sair para encerrar ')
+
+while game != 'sair':
+    grid = create_new_cycle()
+    print_matrix()
+    game = input('Aperte enter para gerar um novo ciclo ou digite sair para encerrar ')
 
 
 
