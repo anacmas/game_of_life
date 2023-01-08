@@ -11,6 +11,26 @@ while i < len(line):
     i += 1
 
 
+coordinate_line = -1
+coordinate_column = -1
+
+while not (coordinate_line >= 1 and coordinate_line <= len(line)):
+    coordinate_line = int(input("Escolha a linha onde sua celula vai começar, coloque um numero de 0 a " + str(len(line)) + ": "))
+    
+    if not (coordinate_line >= 1 and coordinate_line <= len(line)):
+        print('Você digitou um caractere inválido')
+
+while not (coordinate_column >= 1 and coordinate_column <= len(line)):
+    coordinate_column =  int(input("Escolha a coluna onde sua celula vai começar, coloque um numero de 0 a " + str(len(line)) + ": "))
+
+    if not (coordinate_column >= 1 and coordinate_column <= len(line)):
+        print('Você digitou um caractere inválido')
+
+
+
+grid[coordinate_column - 1][coordinate_line - 1] = '0'
+
+
 c = 0
 
 while c < len(grid):
