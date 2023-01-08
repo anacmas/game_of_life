@@ -28,7 +28,15 @@ while not (coordinate_column >= 1 and coordinate_column <= len(line)):
 
 
 
-grid[coordinate_column - 1][coordinate_line - 1] = '0'
+if (coordinate_line >= 1 and coordinate_line <= len(line)) and (coordinate_column >= 1 and coordinate_column <= len(line)):
+
+    grid[coordinate_line - 1][coordinate_column - 1] = '0'
+    grid[coordinate_line - 2][coordinate_column - 1] = '0'
+    grid[coordinate_line][coordinate_column - 1] = '0'
+    grid[coordinate_line - 1][coordinate_column] = '0'
+    grid[coordinate_line - 1][coordinate_column + 1] = '0'
+    grid[coordinate_line - 1][coordinate_column + 2] = '0'
+    grid[coordinate_line - 1][coordinate_column + 3] = '0'
 
 
 c = 0
