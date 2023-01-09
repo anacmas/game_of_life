@@ -75,11 +75,11 @@ def mutate_cells(i, j):
     return alive 
 
 def create_new_cycle():
-    carlos = copy.deepcopy(grid)
+    gridCopy = copy.deepcopy(grid)
     for i in range(len(grid)):
         for j in range(len(grid[i])):
-            carlos[i][j] = mutate_cells(i, j)
-    return carlos        
+            gridCopy[i][j] = mutate_cells(i, j)
+    return gridCopy        
 
 def print_matrix():
     c = 0
@@ -95,7 +95,7 @@ def print_matrix():
 print_matrix()
 
 
-game = input('Aperte enter para gerar um novo ciclo ou digite sair para encerrar ').lower()
+game = input('Aperte enter para gerar ou continuar um ciclo ou digite sair para encerrar ').lower()
 
 while game != 'sair':
     grid = create_new_cycle()
