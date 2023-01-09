@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div>
+      <button @click="showModal = true">Regras</button>
+      <modal v-if="showModal" @close="showModal = false"></modal>
+    </div>
     <div class="board">
       <table>
         <tr v-for="(line, index) in grid" :key="index">
@@ -13,9 +17,9 @@
       </table>
     </div>
     <div>
-      <button class="start" @click="startCycle">Start</button>
-      <button class="stop" @click="stop">Stop</button>
-      <button class="clear" @click="resetGrid">Limpar</button>
+      <button class="button-to-play start" @click="startCycle">Start</button>
+      <button class="button-to-play stop" @click="stop">Stop</button>
+      <button class="button-to-play clear" @click="resetGrid">Limpar</button>
       <p>
         Game Of Life de John Conway, por
         <span class="name"><u>Ana Carolina M</u></span>
@@ -431,7 +435,7 @@ td {
   cursor: pointer;
 }
 
-button {
+button-to-play {
   width: 60px;
   height: 30px;
   margin-left: 10px;
@@ -440,7 +444,7 @@ button {
   border-radius: 3px;
 }
 
-button:hover {
+button-to-play:hover {
   opacity: 60%;
   transition: 0.3s;
 }
