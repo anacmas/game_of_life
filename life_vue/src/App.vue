@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <GameOfLife msg="Oie" />
+    <h1>GAME OF LIFE</h1>
+    <GameOfLife />
   </div>
 </template>
 
@@ -19,10 +19,8 @@ export default {
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #b6b6b6;
+  margin-top: 100px;
 }
 </style>
