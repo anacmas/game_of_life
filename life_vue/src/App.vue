@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>GAME OF LIFE</h1>
+    <h1 class="main-title">GAME OF LIFE</h1>
     <GameOfLife />
   </div>
 </template>
@@ -20,7 +20,10 @@ export default {
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
+  margin-top: 60px;
+}
+
+.main-title {
   color: #b6b6b6;
-  margin-top: 100px;
 }
 </style>

@@ -1,10 +1,5 @@
 <template>
   <div>
-    <div>
-      <ModalPage />
-      <button @click="showModal = true">Regras</button>
-      <div v-if="showModal" @close="showModal = false"></div>
-    </div>
     <div class="board">
       <table>
         <tr v-for="(line, index) in grid" :key="index">
@@ -21,7 +16,20 @@
       <button class="button-to-play start" @click="startCycle">Start</button>
       <button class="button-to-play stop" @click="stop">Stop</button>
       <button class="button-to-play clear" @click="resetGrid">Limpar</button>
-      <p>
+
+      <div class="rules">
+        <h1 class="rules-title">Regras</h1>
+        <h2 class="second-title">Para um espaço preenchido:</h2>
+        <p>Células com zero ou apenas um vizinho morrem, por solidão.</p>
+        <p>
+          Cada célula com quatro ou mais vizinhos morre, por superpopulação.
+        </p>
+        <p>Cada célula com dois ou três vizinhos sobrevive.</p>
+        <h2 class="second-title">Para um espaço vazio ou não preenchido:</h2>
+        <p>Cada célula com três vizinhos torna-se preenchida.</p>
+      </div>
+
+      <p class="about">
         Game Of Life de John Conway, por
         <span class="name"><u>Ana Carolina M</u></span>
       </p>
@@ -30,8 +38,6 @@
 </template>
 
 <script>
-import ModalPage from "./ModalPage.vue";
-
 const clearGrid = [
   [
     false,
@@ -292,9 +298,6 @@ const clearGrid = [
 const size = 14;
 
 export default {
-  components: {
-    ModalPage,
-  },
   name: "GameOfLife",
   data() {
     return {
@@ -464,8 +467,27 @@ td {
   background-color: rgb(255, 215, 215);
 }
 
-p {
-  margin-top: 6rem;
+.rules {
+  color: #898989;
+  margin-top: 35px;
+}
+
+.rules-title {
+  font-size: 16px;
+  color: #6e6e6e;
+}
+
+.second-title {
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.rules p {
+  font-size: 13px;
+}
+
+.about {
+  margin-top: 3rem;
   font-size: 13px;
 }
 
