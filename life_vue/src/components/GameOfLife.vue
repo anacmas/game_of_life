@@ -1,8 +1,9 @@
 <template>
   <div>
     <div>
+      <ModalPage />
       <button @click="showModal = true">Regras</button>
-      <modal v-if="showModal" @close="showModal = false"></modal>
+      <div v-if="showModal" @close="showModal = false"></div>
     </div>
     <div class="board">
       <table>
@@ -29,6 +30,8 @@
 </template>
 
 <script>
+import ModalPage from "./ModalPage.vue";
+
 const clearGrid = [
   [
     false,
@@ -289,9 +292,13 @@ const clearGrid = [
 const size = 14;
 
 export default {
+  components: {
+    ModalPage,
+  },
   name: "GameOfLife",
   data() {
     return {
+      showModal: false,
       grid: clearGrid,
       started: null,
       running: false,
@@ -435,7 +442,7 @@ td {
   cursor: pointer;
 }
 
-button-to-play {
+.button-to-play {
   width: 60px;
   height: 30px;
   margin-left: 10px;
@@ -444,7 +451,7 @@ button-to-play {
   border-radius: 3px;
 }
 
-button-to-play:hover {
+.button-to-play:hover {
   opacity: 60%;
   transition: 0.3s;
 }
