@@ -12,253 +12,395 @@
         </tr>
       </table>
     </div>
-    <div class="buttons">
-      <button class="start">Start</button>
-      <button class="stop">Stop</button>
-      <button class="clear">Clear</button>
+    <div>
+      <button class="start" @click="startCycle">Start</button>
+      <button class="stop" @click="stop">Stop</button>
+      <button class="clear" @click="resetGrid">Limpar</button>
+      <p>
+        Game Of Life de John Conway, por
+        <span class="name"><u>Ana Carolina M</u></span>
+      </p>
     </div>
   </div>
 </template>
 
 <script>
+const clearGrid = [
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+  [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ],
+];
+const size = 14;
+
 export default {
   name: "GameOfLife",
-  props: {
-    msg: String,
-  },
   data() {
     return {
-      grid: [
-        [
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-        ],
-        [
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-        ],
-        [
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-        ],
-        [
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-        ],
-        [
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-        ],
-        [
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-        ],
-        [
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-        ],
-        [
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-        ],
-        [
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-        ],
-        [
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-        ],
-        [
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-        ],
-        [
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-        ],
-        [
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-        ],
-      ],
-      update: 0,
+      grid: clearGrid,
+      started: null,
+      running: false,
     };
   },
   methods: {
     handleClick(index, idx) {
       this.active = !this.active;
       this.grid[index].splice(idx, 1, !this.grid[index][idx]);
-      console.log(this.grid);
+    },
+    resetGrid() {
+      this.stop();
+      for (let i = 0; i < this.grid.length; i++) {
+        for (let j = 0; j < this.grid[i].length; j++) {
+          this.grid[i].splice(j, 1, false);
+        }
+      }
+      return this.grid;
+    },
+    checkNeighbors(i, j) {
+      let neighbors = 0;
+      if (i != 0 && j != 0) {
+        if (this.grid[i - 1][j - 1] == true) {
+          neighbors += 1;
+        }
+      }
+
+      if (i != 0) {
+        if (this.grid[i - 1][j] == true) {
+          neighbors += 1;
+        }
+      }
+
+      if (j != 0) {
+        if (this.grid[i][j - 1] == true) {
+          neighbors += 1;
+        }
+      }
+
+      if (i != size && j != size) {
+        if (this.grid[i + 1][j + 1] == true) {
+          neighbors += 1;
+        }
+      }
+
+      if (i != size) {
+        if (this.grid[i + 1][j] == true) {
+          neighbors += 1;
+        }
+      }
+
+      if (j != size) {
+        if (this.grid[i][j + 1] == true) {
+          neighbors += 1;
+        }
+      }
+
+      if (i != 0 && j != size) {
+        if (this.grid[i - 1][j + 1] == true) {
+          neighbors += 1;
+        }
+      }
+
+      if (i != size && j != 0) {
+        if (this.grid[i + 1][j - 1] == true) {
+          neighbors += 1;
+        }
+      }
+
+      return neighbors;
+    },
+    mutateCells(i, j) {
+      const isInactive = this.grid[i][j] == false;
+
+      const neighbors = this.checkNeighbors(i, j);
+
+      if (isInactive) {
+        if (neighbors == 3) {
+          return true;
+        } else return false;
+      }
+      if (neighbors <= 1 || neighbors >= 4) {
+        return false;
+      }
+
+      return true;
+    },
+    createNewCycle() {
+      let gridCopy = JSON.parse(JSON.stringify(this.grid));
+      for (let i = 0; i <= size; i++) {
+        for (let j = 0; j <= size; j++) {
+          gridCopy[i][j] = this.mutateCells(i, j);
+        }
+      }
+      return gridCopy;
+    },
+    cycle() {
+      const newGrid = this.createNewCycle();
+      for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+          this.grid[i].splice(j, 1, newGrid[i][j]);
+        }
+      }
+    },
+    startCycle() {
+      if (!this.running) {
+        this.running = true;
+        this.started = setInterval(this.cycle, 300);
+      }
+    },
+    stop() {
+      clearInterval(this.started);
+      this.running = false;
     },
   },
 };
@@ -266,8 +408,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.alive {
-  background-color: rgb(100, 139, 174);
+.board {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
 td {
@@ -281,6 +425,10 @@ td {
 
 .non-active {
   background-color: rgb(188, 177, 219);
+}
+
+td {
+  cursor: pointer;
 }
 
 button {
@@ -303,5 +451,20 @@ button:hover {
 
 .stop {
   background-color: rgb(255, 215, 215);
+}
+
+p {
+  margin-top: 6rem;
+  font-size: 13px;
+}
+
+.name {
+  color: rgb(243, 33, 138);
+  cursor: pointer;
+}
+
+.name:hover {
+  color: rgb(188, 177, 219);
+  transition: 0.3s;
 }
 </style>
