@@ -21,4 +21,4 @@ O projeto cria o jogo da vida me python e em Vue.Js
 <h3>Para jogar em Vue.Js</h3> 
 - npm install <br> 
 - npm run serve <br>
-Ou no link:
+Ou no link: https://game-of-life-anacmas.vercel.app/
